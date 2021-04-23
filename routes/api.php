@@ -19,6 +19,9 @@ Route::post('/login', 'AuthController@login');
 Route::post('/register', 'AuthController@register');
 Route::post('/logout', 'AuthController@logout');
 
+
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -20,3 +20,5 @@ Route::get('/{any?}', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('login/github', 'Auth\SocialAccountController@redirectToProvider');

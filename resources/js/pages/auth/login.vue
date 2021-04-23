@@ -21,6 +21,8 @@
           </v-card-actions>
       </v-form>
     </v-card-text>
+
+     <v-btn class="info" @click="github">githubでログインする</v-btn>
   </v-card>
 </template>
 
@@ -42,6 +44,9 @@ export default {
         login(dispatch) { dispatch("login", this.loginInfo)},
       }
     ),
+    github() {
+      axios.get('/login/github')
+    }
   }
 }
 </script>

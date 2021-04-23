@@ -7,6 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -65,8 +66,4 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-    }
 }
