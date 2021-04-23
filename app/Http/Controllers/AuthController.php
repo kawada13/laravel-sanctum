@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             return response()->json([
-                'user' => Auth::user()->name,
+                'user' => Auth::user(),
                 'message' => 'ログイン成功'
             ], 200);
         }
@@ -52,7 +52,7 @@ class AuthController extends Controller
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
                 return response()->json([
-                    'user' => Auth::user()->name,
+                    'user' => Auth::user(),
                     'message' => '登録アンドログイン成功'
                 ], 200);
             }

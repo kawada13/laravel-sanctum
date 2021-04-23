@@ -21,6 +21,7 @@
         class="ml-5"
         style="cursor: pointer" 
         @click="$router.push({ name: 'home' })"
+        v-if="isLogined"
         >
         Home
         </v-toolbar-title>
@@ -42,6 +43,7 @@
         class="ml-5"
         style="cursor: pointer" 
         @click="$router.push({ name: 'login' })"
+        v-if="!isLogined"
         >
         Login 
         </v-toolbar-title>
@@ -49,6 +51,7 @@
         class="ml-5"
         style="cursor: pointer" 
         @click="$router.push({ name: 'register' })"
+        v-if="!isLogined"
         >
         Register 
         </v-toolbar-title>
@@ -56,6 +59,7 @@
         class="ml-5"
         style="cursor: pointer" 
         @click="logout()"
+        v-if="isLogined"
         >
         Logout 
         </v-toolbar-title>
@@ -100,6 +104,12 @@ export default {
     logout() {
       console.log('ログアウト');
       this.$store.dispatch('login/logout')
+    }
+  },
+  computed: {
+    isLogined() {
+      console.log(11);
+      return this.$store.state.login.isAuth
     }
   }
 }

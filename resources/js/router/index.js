@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Home from '../pages/HomeComponent.vue'
+import notFound from '../pages/404.vue'
 // import CategoryList from '../pages/category/index.vue'
 // import CreateCategory from '../pages/category/create.vue'
 // import EditCategory from '../pages/category/edit.vue'
@@ -26,6 +27,7 @@ const routes = new VueRouter({
       path: '/',
       component: Home,
       name:'home',
+      meta: { authOnly: true }
     },
     // {
     //   path: '/category',
@@ -61,18 +63,42 @@ const routes = new VueRouter({
        path: '/auth/login',
        component: Login,
        name:'login',
+       meta: { guestOnly: true }
      },
      {
        path: '/auth/register',
        component: Register,
        name:'register',
+       meta: { guestOnly: true }
      },
     {
       path: '*',
-      component: Home,
-      name:'home',
+      component: notFound,
+      name:'notFound',
     },
   ]
 })
+
+function isLoggedIn() {
+  return localStorage.getItem("auth");
+}
+
+routes.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authOnly)) {
+      if (!isLoggedIn()) {
+          next("/auth/login");
+      } else {
+          next();
+      }
+  } else if (to.matched.some(record => record.meta.guestOnly)) {
+      if (isLoggedIn()) {
+          next("/");
+      } else {
+          next();
+      }
+  } else {
+      next();
+  }
+});
 
 export default routes;
