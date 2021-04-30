@@ -21,7 +21,7 @@
           </v-card-actions>
       </v-form>
     </v-card-text>
-    
+
 
      <v-btn class="info" @click="github">githubでログインする</v-btn>
   </v-card>
@@ -53,4 +53,5 @@ export default {
 </script>
 
 <style>
+
 </style>
